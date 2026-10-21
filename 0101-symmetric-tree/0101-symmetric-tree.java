@@ -15,22 +15,20 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        if(root == null){
+        return fun(root.left, root.right);
+    }
+    public boolean fun(TreeNode t1, TreeNode t2){
+        if(t1 == null && t2 == null){
             return true;
         }
-        return symmetry(root.left, root.right);
-    }    
-    private boolean symmetry(TreeNode p, TreeNode q){
-        if(p == null && q == null){
-            return true;
+        if(t1 == null || t2 == null){
+            return false; 
         }
-        if(p == null || q == null){
-            return false;
+        if(t1.val != t2.val){
+           return false; 
         }
-        if(p.val != q.val){
-            return false;
-        }
-
-       return symmetry(p.left, q.right) && symmetry(p.right, q.left);
+        boolean a1 = fun(t1.left, t2.right);
+        boolean a2 = fun(t1.right, t2.left);
+        return a1 && a2;
     }
 }
