@@ -15,23 +15,20 @@
  */
 class Solution {
     public int minDepth(TreeNode root) {
-        return height(root);
+        return fun(root);
     }
-    private int height(TreeNode root){
-        if(root == null){
+    public int fun(TreeNode t){
+        if(t == null){
             return 0;
         }
-        if(root.left == null && root.right == null){
-            return 1;
+        if(t.left == null){
+            return 1 + fun(t.right);
         }
-        if(root.left == null){
-            return 1 + height(root.right);
+        if(t.right == null){
+            return 1 + fun(t.left);
         }
-        if(root.right == null){
-            return 1 + height(root.left);
-        }
-        int left = height(root.left);
-        int right = height(root.right);
+        int left = fun(t.left);
+        int right = fun(t.right);
         return 1 + Math.min(left, right);
     }
 }
